@@ -105,7 +105,7 @@
                             </tr>
                             <tr style="border-width: 1px">
                                 <td style="border-bottom: solid; border-width: 1px">
-                                    <font size="1px"><b>&emsp;<%- semInfo.yearText.replace('First', '1<sup>st</sup>').replace('Second', '2<sup>nd</sup>').replace('Third', '3<sup>rd</sup>').replace('Fourth', '4<sup>th</sup>') %> <%- semInfo.semText.replace('First', '1<sup>st</sup>').replace('Second', '2<sup>nd</sup>') %>&emsp;</b></font>
+                                    <font size="1px"><b>&emsp;<% if (semInfo.isFinalSem) { %>FINAL<% } else { %><%- semInfo.yearText.replace('First', '1<sup>st</sup>').replace('Second', '2<sup>nd</sup>').replace('Third', '3<sup>rd</sup>').replace('Fourth', '4<sup>th</sup>') %> <%- semInfo.semText.replace('First', '1<sup>st</sup>').replace('Second', '2<sup>nd</sup>') %><% } %>&emsp;</b></font>
                                 </td>
                             </tr>
                             <tr style="border-width: 1px">
@@ -142,7 +142,7 @@
                             </tr>
                             <tr>
                                 <td width="50%" style="text-align: center" colspan="2">
-                                    <font size="1px">Examination for the session</font>   
+                                    <font size="1px"><% if (semInfo.isFinalSem) { %>FINAL<% } else { %><%- semInfo.yearText.replace('First', '1<sup>st</sup>').replace('Second', '2<sup>nd</sup>').replace('Third', '3<sup>rd</sup>').replace('Fourth', '4<sup>th</sup>') %> <%- semInfo.semText.replace('First', '1<sup>st</sup>').replace('Second', '2<sup>nd</sup>') %><% } %> Semester Examination for the session</font>   
                                 </td>
                                 <td width="50%" style="border-bottom: solid;text-align: center; border-width: 1px;">    
                                     <font size="1px"><b><%= semInfo.sessionYear %></b></font>
@@ -205,7 +205,7 @@
                     <font size="2px"><b>Subject</b></font>
                 </td>
                 <td width="10%" style="border-collapse: collapse;border: solid;text-align: center;height: 40px">
-                    <font size="2px"><b>Assigned<br>Credit(C)</b></font>
+                    <font size="2px"><b>Assigned<br>Credit(C<sub>i</sub>)</b></font>
                 </td>
                 <td width="15%" style="border-collapse: collapse;border: solid;text-align: center;height: 40px">
                     <font size="2px"><b>Grade</b></font>
@@ -214,7 +214,7 @@
 
             <!-- Render subject rows (up to 12) -->
             <% 
-            for (let i = 0; i < 12; i++) { 
+            for (let i = 0; i < (semInfo.isFinalSem ? 6 : 12); i++) { 
                 let subject = subjects[i];
             %>
                 <tr>
@@ -235,67 +235,131 @@
         </tbody>
     </table>
     
-    <table width="100%">
-        <tbody>
+    <% if (semInfo.isFinalSem && semInfo.sgpaList) { %>
+        <br>
+        <div style="text-align: center; margin-top: 10px; margin-bottom: 5px;">
+            <font size="2px"><b>Compulsory EVS Status : <%= evsStatus %></b></font>
+        </div>
+        <br>
+        <div style="text-align: center;">
+            <font size="2px"><b>SGPA obtained in the Eight semesters of Bachelors of Engineering in Chemical Engineering Examination</b></font>
+        </div>
+        <br>
+        <table width="100%" border="1" style="border-collapse: collapse; text-align: center; font-size: 11px;">
+            <thead>
+                <tr>
+                    <th width="20%">Semester</th>
+                    <th width="10%">1</th>
+                    <th width="10%">2</th>
+                    <th width="10%">3</th>
+                    <th width="10%">4</th>
+                    <th width="10%">5</th>
+                    <th width="10%">6</th>
+                    <th width="10%">7</th>
+                    <th width="10%">8</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Weightage(W<sub>i</sub>)</b></td>
+                    <% (semInfo.weightageList || ['0.1','0.1','0.2','0.2','0.35','0.35','0.35','0.35']).forEach(w => { %>
+                        <td><%= w %></td>
+                    <% }); %>
+                </tr>
+                <tr>
+                    <td><b>SGPA(S<sub>i</sub>)</b></td>
+                    <% semInfo.sgpaList.forEach(s => { %>
+                        <td><%= s %></td>
+                    <% }); %>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <table width="100%" style="font-size: 12px;">
             <tr>
-                <td style="width: 20%" valign="top">
-                    <font size="2px"><b>SGPA:&nbsp; <%= sgpa %> </b></font>
-                </td>
-                <td>
-                    <font size="2px">&nbsp;</font>
-                </td>
-                <td></td>
-                <td style="text-align: center;">
-                    <font size="2px"><b>
-                        Compulsory EVS Status: <%= evsStatus %>
-                    </b></font>
-                </td>
-                <td>
-                    <font size="2px">&nbsp;</font>
-                </td>
-                <td></td>
-                <td>
-                    <font size="2px">&nbsp;</font>
-                </td>
-                <td style="text-align: right;width: 20%" valign="top">
-                    <font size="2px"><b>Remarks:&nbsp;</b></font> <font size="2px"><b><%= remarks %></b></font>
-                </td>
+                <td width="30%"><b>CGPA: <%= semInfo.cgpa || '7.80' %></b></td>
+                <td width="40%" style="text-align: center;"><b>% Of Weighted Average : <%= semInfo.weightedAvg || '72.15' %></b></td>
+                <td width="30%" style="text-align: right;"><b>Remarks : <%= semInfo.remarks || 'FIRST CLASS' %></b></td>
             </tr>
-        </tbody>
-    </table>  
-
-    <table width="100%">
-        <tbody>
+        </table>
+        <br>
+        <table width="100%" style="font-size: 11px;">
             <tr>
-                <td width="60%">
-                    <font size="0.5px" style="text-align: justify">
-                        This online grade card, processed by JUMS, and published on the JU website is for immediate information to the examinee <b>valid for 3 months</b> only. For
-                        any discrepancies, please contact Office of the Controller of Examinations <b>within 10 days</b> from the date of result publication. The online grade card is 
-                        not valid for any purpose of <b>scholarship and all other rest official works..</b>
-                        <br><b>Regarding Hons. Paper ( if applicable ):</b> Marks Of Hons. Paper Is Not Included in SGPA &amp; Final Percentage Of Marks Calculation.
-                    </font>                
-                </td>  
-                <td width="40%" style="text-align: right;">
-                    <img src="/jums_exam/resources/images/coe_sign.jpg" alt="no image" style="width:200px;height:40px;">
+                <td width="50%">
+                    <b>Processed from : <%= semInfo.processedFrom || 'JUMS' %></b><br>
+                    <b>Date of issue : <%= semInfo.issueDate || '13-07-2026' %></b><br>
                     <br>
-                    <font size="2px"><b>Controller of Examinations</b></font>
-                </td>  
+                    <b>Date of result publication: <%= semInfo.pubDate || '29-06-2026' %></b>
+                </td>
+                <td width="50%" style="text-align: right;" valign="top">
+                    <b>Generated by : <%= semInfo.generatedBy || '110002' %></b><br><br>
+                    <img src="/jums_exam/resources/images/coe_sign.jpg" alt="no image" style="width:180px;height:35px;"><br>
+                    <b>Controller of Examinations</b><br>
+                    <font size="1px">(See overleaf)</font>
+                </td>
             </tr>
-            <tr>
-                <td colspan="2" style="text-align: left;"><font size="0.5px">
-                    <b><%= isSupple ? "Month of issue:" : "Date of Issue:" %></b> <%= issueDate %> &nbsp;&nbsp;<%= isSupple ? "(Supplementary)" : "" %>
-                    <% if (semInfo.generatedBy) { %>
-                        <br><b>Generated by:</b> <%= semInfo.generatedBy %>
-                    <% } %>
-                    <% if (semInfo.processedFrom) { %>
-                        <br><b>Processed from:</b> <%= semInfo.processedFrom %>
-                    <% } %>
-                    <% if (semInfo.reviewStart && semInfo.reviewEnd) { %>
-                    <% } %>
-                </font></td>
-            </tr>
-        </tbody>
-    </table>
+        </table>
+    <% } else { %>
+        <table width="100%">
+            <tbody>
+                <tr>
+                    <td style="width: 20%" valign="top">
+                        <font size="2px"><b>SGPA:&nbsp; <%= sgpa %> </b></font>
+                    </td>
+                    <td>
+                        <font size="2px">&nbsp;</font>
+                    </td>
+                    <td></td>
+                    <td style="text-align: center;">
+                        <font size="2px"><b>
+                            Compulsory EVS Status: <%= evsStatus %>
+                        </b></font>
+                    </td>
+                    <td>
+                        <font size="2px">&nbsp;</font>
+                    </td>
+                    <td></td>
+                    <td>
+                        <font size="2px">&nbsp;</font>
+                    </td>
+                    <td style="text-align: right;width: 20%" valign="top">
+                        <font size="2px"><b>Remarks:&nbsp;</b></font> <font size="2px"><b><%= remarks %></b></font>
+                    </td>
+                </tr>
+            </tbody>
+        </table>  
+
+        <table width="100%">
+            <tbody>
+                <tr>
+                    <td width="60%">
+                        <font size="0.5px" style="text-align: justify">
+                            This online grade card, processed by JUMS, and published on the JU website is for immediate information to the examinee <b>valid for 3 months</b> only. For
+                            any discrepancies, please contact Office of the Controller of Examinations <b>within 10 days</b> from the date of result publication. The online grade card is 
+                            not valid for any purpose of <b>scholarship and all other rest official works..</b>
+                            <br><b>Regarding Hons. Paper ( if applicable ):</b> Marks Of Hons. Paper Is Not Included in SGPA &amp; Final Percentage Of Marks Calculation.
+                        </font>                
+                    </td>  
+                    <td width="40%" style="text-align: right;">
+                        <img src="/jums_exam/resources/images/coe_sign.jpg" alt="no image" style="width:200px;height:40px;">
+                        <br>
+                        <font size="2px"><b>Controller of Examinations</b></font>
+                    </td>  
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: left;"><font size="0.5px">
+                        <b><%= isSupple ? "Month of issue:" : "Date of Issue:" %></b> <%= issueDate %> &nbsp;&nbsp;<%= isSupple ? "(Supplementary)" : "" %>
+                        <% if (semInfo.generatedBy) { %>
+                            <br><b>Generated by:</b> <%= semInfo.generatedBy %>
+                        <% } %>
+                        <% if (semInfo.processedFrom) { %>
+                            <br><b>Processed from:</b> <%= semInfo.processedFrom %>
+                        <% } %>
+                    </font></td>
+                </tr>
+            </tbody>
+        </table>
+    <% } %>
     
     <script type="text/javascript">
         function printpage() {

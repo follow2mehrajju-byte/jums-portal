@@ -247,16 +247,18 @@ async function runTests() {
         assert.ok(!test38.body.includes('view_print_ccc.jsp'), "Non-final sem index: Should NOT have CCC link");
         console.log("TEST 3.8 PASSED: Non-final semester index retains grade card link and empty supplementary columns.");
 
-        // TEST 3.9: Grade card route for final semester returns 'not available'
-        console.log("\n--- TEST 3.9: Unavailable Grade Card (Final Semester) ---");
+        // TEST 3.9: Final Semester Grade Card with 8-Semester SGPA Table
+        console.log("\n--- TEST 3.9: Final Semester Grade Card ---");
         const test39 = await request({
             host: 'localhost', port: TEST_PORT,
-            path: '/jums_exam/student_even_2026/result/view_print_result_be.jsp?exam_roll=CHE00268012',
+            path: '/jums_exam/student_even_2026/result/view_print_result_be.jsp?exam_roll=CHE00268083',
             method: 'GET', headers: { 'Cookie': cookieVal }
         });
         assert.strictEqual(test39.res.statusCode, 200, "Should return 200 OK");
-        assert.ok(test39.body.includes('Sorry !!!<br>Grade Card not available.'), "Should display 'not available' message");
-        console.log("TEST 3.9 PASSED: Unavailable Grade Card for final semester handled correctly.");
+        assert.ok(test39.body.includes('SGPA obtained in the Eight semesters'), "Should contain 8-semester SGPA summary header");
+        assert.ok(test39.body.includes('CGPA: 7.80'), "Should contain CGPA 7.80");
+        assert.ok(test39.body.includes('INDUSTRIAL MANAGEMENT'), "Should contain final semester subject");
+        console.log("TEST 3.9 PASSED: Final Semester Grade Card loaded with 8-semester SGPA summary table.");
 
         // TEST 4: Sign out clears cookies
         console.log("\n--- TEST 4: Sign Out ---");

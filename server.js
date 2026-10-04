@@ -714,7 +714,7 @@ const semesterData = {
         "reviewAction": "Review",
         "examRoll": "CHE00256034",
         "hasGradeCard": true,
-        "sgpa": "7.79",
+        "sgpa": "7.94",
         "remarks": "P",
         "evsStatus": "Passed",
         "issueDate": "21-07-2025",
@@ -822,7 +822,7 @@ const semesterData = {
         "reviewAction": "Review",
         "examRoll": "CHE00267086",
         "hasGradeCard": true,
-        "sgpa": "8.43",
+        "sgpa": "8.48",
         "remarks": "P",
         "evsStatus": "Passed",
         "issueDate": "16-02-2026",
@@ -902,17 +902,23 @@ const semesterData = {
         "semName": "Even",
         "sessionYear": "2025-2026",
         "examYear": "2026",
-        "issueYear": "Pending",
+        "issueYear": "2026",
         "degreeCourseText": "4 Year 8 Semester Degree Course",
         "tableSemText": "8th Semester (Even 2025-26)",
         "reviewAction": "Review",
-        "examRoll": "CHE00268012",
-        "hasGradeCard": false,
-        "sgpa": "Pending",
-        "remarks": "Pending",
+        "examRoll": "CHE00268083",
+        "serialNo": "UG ENGG / CBCS / 26 / 04674",
+        "hasGradeCard": true,
+        "sgpa": "8.54",
+        "cgpa": "7.80",
+        "weightedAvg": "72.15",
+        "remarks": "FIRST CLASS",
         "evsStatus": "Passed",
-        "issueDate": "Pending",
-        "heldIn": "April-May, 2026",
+        "issueDate": "13-07-2026",
+        "pubDate": "29-06-2026",
+        "heldIn": "APRIL-MAY , 2026",
+        "generatedBy": "110002",
+        "processedFrom": "JUMS",
         "submissionTime": "29-Apr-2026 16:50:42",
         "mobileNoLabel": "Mobile No:",
         "emailIdLabel": "Email Id :",
@@ -921,6 +927,8 @@ const semesterData = {
         "printDate": "Thu May 14 18:26:00 IST 2026",
         "signatureText": "Issued by: Controller of Examinations",
         "signatureImage": "coe_sign.jpg",
+        "sgpaList": ["6.15", "6.28", "7.11", "7.27", "7.84", "7.94", "8.48", "8.54"],
+        "weightageList": ["0.1", "0.1", "0.2", "0.2", "0.35", "0.35", "0.35", "0.35"],
         "asterisks": [
             "**Candidates must sign on the printed copy of the provisional admit card and sign on photograph before entering in to the examination hall. With out sign the provisional admit card will not be accepted.",
             "***GRADE CARD will be issued from counter only against the printed copy of online provisional admit card duly signed by the invigilators during examination for all the subjects he/she is appearing.",
@@ -931,18 +939,52 @@ const semesterData = {
         ],
         "subjects": [
             {
-                "code": "Che/HS/B/Mech/T/423",
-                "name": "INDUSTRIAL MANAGEMENT (Che/HS/B/Mech/T/423)",
-                "credit": 4,
+                "code": "CHE/HS/B/MECH/T/423",
+                "name": "INDUSTRIAL MANAGEMENT",
+                "credit": 3,
                 "date": "15/05/2026",
-                "time": "11:00 - 2:00 PM"
+                "time": "11:00 - 2:00 PM",
+                "grade": "A"
             },
             {
-                "code": "Che/PE/B/T/424D",
-                "name": "BIOENGINEERING & BIOPROCESS ENGINEERING (Che/PE/B/T/424D)",
-                "credit": 4,
+                "code": "CHE/PE/B/T/424D",
+                "name": "BIOENGINEERING & BIOPROCESS ENGINEERING",
+                "credit": 3,
                 "date": "29/05/2026",
-                "time": "11:00 - 2:00 PM"
+                "time": "11:00 - 2:00 PM",
+                "grade": "A"
+            },
+            {
+                "code": "CHE/PC/B/S/421",
+                "name": "CHEMICAL PROCESS DESIGN & DRAWING",
+                "credit": 1.5,
+                "date": "",
+                "time": "",
+                "grade": "A"
+            },
+            {
+                "code": "CHE/PC/B/S/422",
+                "name": "HEAT & MASS TRANSFER LABORATORY",
+                "credit": 2,
+                "date": "",
+                "time": "",
+                "grade": "C"
+            },
+            {
+                "code": "CHE/PS/B/S/423",
+                "name": "SEMINAR - II",
+                "credit": 2,
+                "date": "",
+                "time": "",
+                "grade": "A"
+            },
+            {
+                "code": "CHE/PS/B/S/424",
+                "name": "GENERAL VIVA-VOCE",
+                "credit": 2,
+                "date": "",
+                "time": "",
+                "grade": "B"
             }
         ]
     }
