@@ -1,0 +1,40 @@
+#header {
+    height: 20%;
+    background: #006699;
+    border-radius: 10px;
+    border: 1px solid #005285;
+    margin: 5px;
+}
+
+#headerwrap {
+    width: 1000px;
+    float: left;
+    margin: 0 auto;
+}
+
+#footer {
+	bottom: 0%;
+    height: 40px;
+    background: #2B2B2B;
+    border-radius: 10px;
+    border: 1px solid #171717;
+    margin: 5px;
+}
+p.center {
+    text-align: center;
+    color: #FFFFFF;
+}
+
+p.Vlarge {
+    font-size: 250%;
+	color: #FFFFFF;
+}
+
+p.large {
+    font-size: 150%;
+	color: #FFFFFF;
+}
+p.normal {
+    font-size: 100%;
+	color: #FFFFFF;
+}

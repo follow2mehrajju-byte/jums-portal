@@ -1,0 +1,46 @@
+{
+  "123456789012": {
+    "roll_no": "123456789012",
+    "password": "password123",
+    "mobile_no": "9876543210",
+    "email": "sourish@gmail.com",
+    "name": "SOURISH SENAPATI",
+    "dept": "Computer Science & Engineering",
+    "sem": "8th Semester",
+    "registration_no": "162135",
+    "registration_session": "2022-23"
+  },
+  "987654321098": {
+    "roll_no": "987654321098",
+    "password": "mypassword123",
+    "mobile_no": "9988776655",
+    "email": "janedoe@gmail.com",
+    "name": "Jane Doe",
+    "dept": "Information Technology",
+    "sem": "1st Semester",
+    "registration_no": "162135",
+    "registration_session": "2022-23"
+  },
+  "002210301129": {
+    "roll_no": "002210301129",
+    "password": "SUKU2003",
+    "mobile_no": "9083486109",
+    "email": "deepshikhabhunia168@gmail.com",
+    "name": "DEEPSHIKHA  BHUNIA",
+    "dept": "Chemical Engineering",
+    "sem": "Even Semester (2025-26)",
+    "registration_no": "162077",
+    "registration_session": "2022-23"
+  },
+  "002210301208": {
+    "roll_no": "002210301208",
+    "password": "14a1bc79",
+    "mobile_no": "8918681467",
+    "email": "mehrajmullick@gmail.com",
+    "name": "MEHRAJ ALAM MULLICK",
+    "dept": "CHEMICAL ENGINEERING",
+    "sem": "1st Semester",
+    "registration_no": "162135",
+    "registration_session": "2022-23"
+  }
+}

@@ -1,0 +1,19 @@
+.dynamic_table {width:99.9%;}
+.dynamic_table table { border-collapse: collapse; text-align: left; } 
+.dynamic_table {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #95B8E7; }
+.dynamic_table table td, .dynamic_table table th { padding: 3px 3px;border-left: 1px solid #0070A8;}
+.dynamic_table table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #EFEFEF), color-stop(1, #EFEFEF) );background:-moz-linear-gradient( center top, #EFEFEF 5%, #EFEFEF 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#EFEFEF', endColorstr='#EFEFEF');background-color:#EFEFEF; color:#000000; font-size: 12px; font-weight: normal; border-left: 1px solid #0070A8; border-top: 1px solid #0070A8; border-bottom: 1px solid #0070A8; border-right: 1px solid #0070A8;} 
+.dynamic_table table thead th:first-child { border-left: 1px solid #0070A8; border-top: 1px solid #0070A8; border-bottom: 1px solid #0070A8; border-right: 1px solid #0070A8; }
+.dynamic_table table tbody td { color: #00496B; border-left: 1px solid #0070A8;border-right: 1px solid #0070A8;font-size: 12px;border-bottom: 1px solid #E1EEF4;font-weight: normal; }
+.dynamic_table table tbody td:first-child { border-left: 1px solid #0070A8; }
+.dynamic_table table tbody tr:last-child td { border-bottom: 1px solid #0070A8; }
+.dynamic_table table tfoot td div { border-top: 1px solid #95B8E7;background: #E1EEF4;} 
+.dynamic_table table tfoot td { padding: 0; font-size: 10px } 
+.dynamic_table table tfoot td div{ padding: 0px; }
+.dynamic_table table tfoot td ul { margin: 0; padding:0; list-style: none; text-align: right; }
+.dynamic_table table tfoot  li { display: inline; }
+.dynamic_table table tfoot li a { text-decoration: none; display: inline-block;  padding: 2px 3px; margin: 1px;color: #FFFFFF;border: 1px solid #0B9957;background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #369971), color-stop(1, #457F6D) );background:-moz-linear-gradient( center top, #369971 5%, #457F6D 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#369971', endColorstr='#457F6D');background-color:#369971; }
+.dynamic_table table tfoot ul.active, .dynamic_table table tfoot ul a:hover { text-decoration: none;border-color: #596899; color: #FFFFFF; background: none; background-color:#407F59;}div.dhtmlx_window_active, div.dhx_modal_cover_dv { position: fixed !important; }
+.dynamic_table table tr:nth-child(even) {
+    background-color: #F7F7F7;
+}
