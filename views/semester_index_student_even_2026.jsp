@@ -314,7 +314,11 @@
                                     
                                 <% } %>
                             </td>
-                            <td align="center" style="padding: 5px;"></td>
+                            <td align="center" style="padding: 5px;">
+                                <% if (semInfo.isFinalSem) { %>
+                                    <a target="_blank" href="/jums_exam/<%= semDir %>/provisional_certificate.jsp?exam_roll=<%= semInfo.examRoll %>">View / Print Provisional Certificate</a>
+                                <% } %>
+                            </td>
                             <td align="center" style="padding: 5px;"></td>
                             <td align="center" style="padding: 5px;"></td>
                             <td align="center" style="padding: 5px;"></td>

@@ -1152,6 +1152,45 @@ app.get('/jums_exam/:sem_dir/course_completion_certificate.jsp', (req, res) => {
     });
 });
 
+// 13c. Provisional Pass Certificate route (final semester only)
+app.get(['/jums_exam/:sem_dir/provisional_certificate.jsp', '/jums_exam/:sem_dir/provisional_pass_certificate.jsp'], (req, res) => {
+    const semDir = req.params.sem_dir;
+    const roll_no = req.cookies.user_roll;
+    if (!roll_no) { res.redirect('/jums_exam/signout.do'); return; }
+    const users = readUsers();
+    const student = users[roll_no];
+    if (!student) { res.redirect('/jums_exam/signout.do'); return; }
+    const semInfo = semesterData[semDir];
+    if (!semInfo || !semInfo.isFinalSem) {
+        res.status(403).send('Provisional Pass Certificate is only available for the final semester.');
+        return;
+    }
+
+    let courseName = student.dept;
+    if (!courseName.startsWith("B.E.") && !courseName.startsWith("B.Tech.") && !courseName.startsWith("B.Sc.") && !courseName.toLowerCase().includes("bachelor")) {
+        courseName = "Bachelor of Engineering in " + courseName;
+    }
+
+    const regSession = student.registration_session ? student.registration_session.replace(/^20/, '').replace(/-20/, '-') : '22-23';
+
+    res.render('provisional_certificate.jsp', {
+        student,
+        semDir,
+        semInfo,
+        examRoll: semInfo.examRoll,
+        degreeName: courseName,
+        regSession: regSession,
+        examYear: semInfo.examYear || '2026',
+        heldIn: semInfo.heldIn || 'APRIL - MAY , 2026',
+        remarks: semInfo.remarks || 'FIRST CLASS',
+        weightedAvg: semInfo.weightedAvg || '72.15',
+        convocationDate: semInfo.convocationDate || '24.12.2026',
+        issueDate: semInfo.provisionalDate || '15-07-2026',
+        generatedBy: semInfo.generatedBy || '110002'
+    });
+});
+
+
 function renderGradeCard(req, res, isSupple) {
     const semDir = req.params.sem_dir;
     const roll_no = req.cookies.user_roll;

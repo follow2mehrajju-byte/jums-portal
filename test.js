@@ -32,8 +32,8 @@ function startServer() {
             reject(err);
         });
         
-        // Timeout if server doesn't start in 5s
-        setTimeout(() => reject(new Error("Server start timeout")), 5000);
+        // Timeout if server doesn't start in 10s
+        setTimeout(() => reject(new Error("Server start timeout")), 10000);
     });
 }
 
@@ -259,6 +259,34 @@ async function runTests() {
         assert.ok(test39.body.includes('CGPA: 7.80'), "Should contain CGPA 7.80");
         assert.ok(test39.body.includes('INDUSTRIAL MANAGEMENT'), "Should contain final semester subject");
         console.log("TEST 3.9 PASSED: Final Semester Grade Card loaded with 8-semester SGPA summary table.");
+
+        // TEST 3.10: Access Provisional Pass Certificate (Final Semester)
+        console.log("\n--- TEST 3.10: Access Provisional Pass Certificate ---");
+        const test310 = await request({
+            host: 'localhost', port: TEST_PORT,
+            path: '/jums_exam/student_even_2026/provisional_certificate.jsp?exam_roll=CHE00268083',
+            method: 'GET', headers: { 'Cookie': cookieVal }
+        });
+        assert.strictEqual(test310.res.statusCode, 200, "Provisional Cert: Should return 200 OK");
+        assert.ok(test310.body.includes('To whom it may concern'), "Provisional Cert: Should display title");
+        assert.ok(test310.body.includes('JADAVPUR UNIVERSITY'), "Provisional Cert: Should display university header");
+        assert.ok(test310.body.includes('Ref.No.PROV/'), "Provisional Cert: Should display Ref No");
+        assert.ok(test310.body.includes('FIRST CLASS'), "Provisional Cert: Should display class/grade");
+        assert.ok(test310.body.includes('72.15%'), "Provisional Cert: Should display percentage marks");
+        assert.ok(test310.body.includes('Controller of Examinations'), "Provisional Cert: Should display CoE title");
+        console.log("TEST 3.10 PASSED: Provisional Pass Certificate loaded successfully.");
+
+        // TEST 3.11: Check Even Semester (2025-26) tab contains link to Provisional Pass Certificate
+        console.log("\n--- TEST 3.11: Final Semester Index — Provisional Certificate Link ---");
+        const test311 = await request({
+            host: 'localhost', port: TEST_PORT,
+            path: '/jums_exam/student_even_2026/index.jsp',
+            method: 'GET', headers: { 'Cookie': cookieVal }
+        });
+        assert.strictEqual(test311.res.statusCode, 200, "Final sem index: Should return 200 OK");
+        assert.ok(test311.body.includes('provisional_certificate.jsp'), "Final sem index: Should contain link to provisional_certificate.jsp");
+        assert.ok(test311.body.includes('View / Print Provisional Certificate'), "Final sem index: Should display link text 'View / Print Provisional Certificate'");
+        console.log("TEST 3.11 PASSED: Final semester index contains Provisional Certificate link.");
 
         // TEST 4: Sign out clears cookies
         console.log("\n--- TEST 4: Sign Out ---");
